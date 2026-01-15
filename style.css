@@ -1,0 +1,362 @@
+/* === GLOBAL === */
+body {
+  background-color: #000;
+  color: #fff;
+  font-family: 'Arial Black', sans-serif;
+  text-align: center;
+  padding: 0px;
+  margin: 0 auto;
+}
+
+/* === TEAM LOGOS === */
+.team-logo {
+  width: 60px;        /* final chosen size */
+  height: 60px;
+  object-fit: contain;
+  display: none;      /* hidden until JS shows it */
+  vertical-align: middle;
+}
+
+/* === TEAM DISPLAY === */
+.team-display {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.score {
+  display: block;
+  margin-top: 1px;
+  margin-bottom: 2px;
+  line-height: 1.1;
+}
+
+.clock-row td {
+  border-top: 2px solid #444 !important;
+}
+
+/* === POSSESSION ICONS === */
+#home-possession,
+#away-possession {
+  font-size: 20px;
+  margin-right: 4px;
+  cursor: pointer;
+}
+
+
+/* === UNIFIED SCOREBOARD FIELD === */
+.scoreboard-field {
+  background-color: #000;
+  color: white;
+  font-family: 'Arial Black', sans-serif;
+  text-align: center;
+  padding: 1px 0;
+  border: none;
+  border-radius: 0;
+  width: 80px;
+  box-sizing: border-box;
+}
+
+.scoreboard {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  background: #000;
+  color: #fff;
+  border: 2px solid #444;
+  border-radius: 8px;
+}
+
+.scoreboard td {
+  border: 1px solid #444;
+  padding: 12px;
+  text-align: center;
+}
+
+/* === DOWN CONTROL === */
+.down-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+
+.down-label {display: block; margin-bottom: 4px; }
+.down-display { margin-bottom: 6px; }
+
+#quarterField,
+#downField {
+  width: 24px;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  font-size: 18px;
+  pointer-events: auto;
+  background-color: #222;
+  color: white;
+  border: none;
+  outline: none;
+}
+
+/* === TEAM NAME CLICKS === */
+.home-name,
+.away-name {
+  cursor: pointer;
+}
+
+.home-name span,
+.away-name span {
+  margin: 0 4px;
+  font-size: 24px;
+}
+
+/* === BALL POSITION LAYOUT === */
+.yard-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+}
+.ballon-label,
+#ballOn {
+  display: block;
+}
+
+#ballOn {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+
+
+/* === TEAM BOXES === */
+.team {
+  display: inline-block;
+  vertical-align: top;
+  background-color: #111;
+  border: 4px solid #FFD700;
+  padding: 20px;
+  border-radius: 10px;
+  width: 350px;
+}
+
+/* === GAME INFO LABELS === */
+.game-info {
+  margin-top: 12px;
+  text-align: center;
+  color: white;
+}
+
+
+/* === ROLL BUTTON & DICE === */
+
+
+
+/* === SCORE ROW TIGHTENING === */
+.score-row td,
+.score-buttons td {
+  padding-top: 2px !important;
+  padding-bottom: 2px !important;
+}
+
+/* === DICE === */
+.die {
+  font-size: 60px;     /* your mobile size */
+  margin-top: -10px;   /* THIS is the fix */
+}
+
+
+.die-white { color: inherit; }
+.die-red {
+  color: red;
+  filter: drop-shadow(0 0 4px #900);
+}
+
+/* === DICE AREA === */
+#dice-area {
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+  flex-wrap: nowrap;
+  width: 90%;
+  max-width: 260px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* === DIE WRAPPER === */
+.die-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 4px;
+  width: 80px;
+}
+/* === GLOBAL HOLD DOT === */
+.hold-dot {
+  font-size: 18px;     /* or 32px in landscape */
+  line-height: 18px;
+  margin-bottom: 0;
+  color: gold;
+  visibility: hidden;
+}
+/* === NEW GAME TOP BAR === */
+.top-bar {
+  padding: 20px 0 10px 0;
+  text-align: center;
+}
+/* === PLUS/MINUS BUTTONS === */
+.pmbutton {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+}
+
+/* Big action buttons */
+.actionbutton {
+  width: auto;
+  height: auto;
+  padding: 6px 14px;
+  margin-top: 6px;
+}
+
+/* Roll Dice button */
+.roll-button {
+  padding: 10px 20px;
+  border-radius: 10px;   /* keep if you want roll-button rounder */
+  margin-top: 10px;
+  display: inline-block;
+}
+
+/* === BUTTON SHAPE & FEEL (shared) === */
+.pmbutton,
+.actionbutton,
+.roll-button {
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* === PM BUTTON COLORS === */
+.pmbutton {
+  background: wheat;
+  color: black;
+  border: 2px solid dimgray;
+}
+.pmbutton:active {
+  background: dimgray;
+  color: white;
+}
+
+/* === ACTION BUTTON COLORS === */
+.actionbutton {
+  background: wheat;
+  color: black;
+  border: 2px solid steelblue;
+}
+.actionbutton:active {
+  background: steelblue;
+  color: white;
+}
+
+/* === ROLL BUTTON COLORS === */
+.roll-button {
+  background: wheat;
+  color: black;
+  border: 2px solid gray;
+}
+.roll-button:active {
+  background: gray;
+  color: white;
+}
+
+/* Captions / labels near buttons */
+.q-label,
+.sb-label,
+.ballon-label,
+.down-label {
+  color: #fff;
+  font-weight: normal;
+}
+
+/* Captions / labels near buttons */
+.q-label,
+.sb-label,
+.ballon-label,
+.down-label {
+  color: #fff;
+  font-weight: normal;
+}
+
+/* === FONT WEIGHTS (centralized) === */
+.score { font-weight: bold; }
+.clock { font-weight: bold; }
+.pmbutton { font-weight: normal; }
+.actionbutton { font-weight: bold; }
+.roll-button { font-weight: bold; }
+.ballon-label { font-weight: 600; }
+.down-label { font-weight: 600; }
+.home-name span,
+.away-name span { font-weight: bold; }
+.game-info label {
+  font-weight: bold;
+  margin-right: 6px;
+}
+/* === FONT SIZES (centralized) === */
+.score { font-size: 35px; }
+.pmbutton { font-size: 15px; }
+.actionbutton { font-size: 18px; }
+.scoreboard-field { font-size: 28px; }
+.clock { font-size: 32px; }
+.home-name span,
+.away-name span { font-size: 24px; }
+.roll-button { font-size: 20px; }
+.ballon-label { font-size: 16px; }
+.down-label { font-size: 28px; }
+.q-label { font-size: 28px; }
+.sb-label { font-size: 28px; }
+#quarterField,
+#downField {
+  font-size: 22px;   /* or 18px if you want them smaller */
+}
+#quarterField,
+#downField {
+  font-size: 35px;
+}
+/* === MOBILE === */
+@media (orientation: portrait) {
+    ...
+}
+/* === MOBILE === */
+@media (orientation: portrait) {
+  .scoreboard {
+    width: 100%;
+    white-space: normal;
+  }
+
+  .team {
+    width: 90%;
+    display: block;
+    margin: 20px auto;
+  }
+
+  #dice-area {
+    gap: 2px;
+  }
+
+  .die {
+    font-size: 70px;
+  }
+
+  .die-wrapper {
+    width: 70px;
+    margin: 2px;
+  }
+
+  .hold-dot {
+    font-size: 18px;
+    margin-bottom: -4px;   /* bring dot closer to die */
+  }
+}

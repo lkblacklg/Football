@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NFL Scoreboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body onload="init()">
+<div class="top-bar">
+  <button class="actionbutton" onclick="newGame()">New Game</button>
+</div>
+<div class="scoreboard-title">
+<select id="homeTeamSelect" onchange="teamSelectChange(this)"></select>
+<select id="awayTeamSelect" onchange="teamSelectChange(this)"></select>
+
+<div class="team-display">
+  <img id="homeLogo" class="team-logo" />
+  <span id="homeName"></span>
+</div>
+
+<div class="team-display">
+  <img id="awayLogo" class="team-logo" />
+  <span id="awayName"></span>
+</div>
+</div>
+
+<table class="scoreboard">
+
+<!-- ROW 1: HOME | AWAY -->
+<tr class="score-row">
+
+  <!-- HOME -->
+  <td style="width:50%; text-align:center; border:none;"
+      onclick="setPossession('home')">
+    <span id="home-possession"></span>
+    <span id="homeLabel">Home</span>
+    <img id="homeLogo" class="team-logo">
+    <div id="homeScore" class="score">0</div>
+  </td>
+
+  <!-- AWAY -->
+  <td style="width:50%; text-align:center; border:none;"
+      onclick="setPossession('away')">
+    <span id="away-possession"></span>
+    <img id="awayLogo" class="team-logo">
+    <span id="awayLabel">Away</span>
+    <div id="awayScore" class="score">0</div>
+  </td>
+
+</tr>
+
+  <!-- ROW 2: SCORE BUTTONS -->
+  <tr>
+    <td colspan="2" style="border:none; padding:0;">
+
+      <table style="width:100%; border-collapse:collapse; border:none;">
+        <tr class="score-buttons">
+          <!-- HOME BUTTONS -->
+          <td style="width:50%; text-align:center; border:none;">
+            <div class="score-controls" data-team="home">
+              <button class="pmbutton" onclick="adjustScore(this,1)">+1</button>
+              <button class="pmbutton" onclick="adjustScore(this,2)">+2</button>
+              <button class="pmbutton" onclick="adjustScore(this,3)">+3</button>
+              <button class="pmbutton" onclick="adjustScore(this,6)">+6</button>
+              <button class="pmbutton" onclick="adjustScore(this,-1)">-1</button>
+            </div>
+          </td>
+
+          <!-- AWAY BUTTONS -->
+          <td style="width:50%; text-align:center; border:none;">
+            <div class="score-controls" data-team="away">
+              <button class="pmbutton" onclick="adjustScore(this,1)">+1</button>
+              <button class="pmbutton" onclick="adjustScore(this,2)">+2</button>
+              <button class="pmbutton" onclick="adjustScore(this,3)">+3</button>
+              <button class="pmbutton" onclick="adjustScore(this,6)">+6</button>
+              <button class="pmbutton" onclick="adjustScore(this,-1)">-1</button>
+            </div>
+          </td>
+
+        </tr>
+
+        <!-- CLOCK ROW -->
+        <tr class="clock-row">
+
+          <!-- CLOCK DISPLAY -->
+          <td style="text-align:center; border:none;">
+            <div class="sb-cell clock" id="game-clock">12:00</div>
+            
+            <button class="actionbutton" onclick="newQuarter()">New Quarter</button>
+          </td>
+
+          <!-- CLOCK BUTTONS -->
+          <td style="text-align:center; border:none;">
+            <div class="clock-controls" data-clock="game">
+              <button class="pmbutton" onclick="adjustClock(-60)">-60</button>
+              <button class="pmbutton" onclick="adjustClock(-30)">-30</button>
+              <button class="pmbutton" onclick="adjustClock(-10)">-10</button>
+              <button class="pmbutton" onclick="adjustClock(-1)">-1</button><br/>
+              <button class="pmbutton" onclick="adjustClock(1)">+1</button>
+              <button class="pmbutton" onclick="adjustClock(10)">+10</button>
+              <button class="pmbutton" onclick="adjustClock(30)">+30</button>
+              <button class="pmbutton" onclick="adjustClock(60)">+60</button>
+            </div>
+          </td>
+        </tr>
+      </table>
+
+    </td>
+  </tr>
+
+  <!-- ROW 3: QUARTER + DOWN -->
+  <tr>
+    <td colspan="2">
+ <div class="down-container">
+
+  <span class="q-label">Q</span>
+  <input id="quarterField" class="sb-cell" type="text" value="1" readonly>
+
+  <button id="quarter-minus" class="pmbutton" onclick="adjustQD(this,-1)">-</button>
+  <button id="quarter-plus"  class="pmbutton" onclick="adjustQD(this,1)">+</button>
+
+  <span class="sb-label">&nbsp;&nbsp;Down</span>
+  <input id="downField" class="sb-cell" type="text" value="1" readonly>
+
+  <button id="down-minus" class="pmbutton" onclick="adjustQD(this,-1)">-</button>
+  <button id="down-plus"  class="pmbutton" onclick="adjustQD(this,1)">+</button>
+
+</div>
+</td>
+
+  <!-- ROW 4: BALL ON -->
+  <tr>
+    <td colspan="2" style="padding:0; border:none;">
+
+      <table style="width:100%; border-collapse:collapse; border:none;">
+        <tr>
+
+          <td style="width:40%; text-align:center; border:none; padding-left:8px;">
+            <label class="ballon-label">Ball On</label>
+            <input id="ballOn" class="scoreboard-field" type="text" value="35" readonly>
+          </td>
+          <td style="width:60%; text-align:center; border:none; padding-right:8px;">
+            <div style="margin-bottom:4px;">
+              <button class="pmbutton" onclick="adjustBallOn(-10)">-10</button>
+              <button class="pmbutton" onclick="adjustBallOn(-5)">-5</button>
+              <button class="pmbutton" onclick="adjustBallOn(-1)">-1</button>
+            </div>
+            <div>
+              <button class="pmbutton" onclick="adjustBallOn(1)">+1</button>
+              <button class="pmbutton" onclick="adjustBallOn(5)">+5</button>
+              <button class="pmbutton" onclick="adjustBallOn(10)">+10</button>
+            </div>
+          </td>
+
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<br/>
+      <div id="dice-area"></div>
+      <button class="roll-button" onclick="rollAndDisplay()">Roll Dice</button>
+
+<script src="util.js"></script>
+<script src="dice.js"></script>
+
+</body>
+</html>
