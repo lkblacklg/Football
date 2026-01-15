@@ -31,6 +31,6 @@
     { "id": "seahawks",       "name": "Seattle Seahawks",       "logo": "" },
     { "id": "buccaneers",     "name": "Tampa Bay Buccaneers",   "logo": "" },
     { "id": "titans",         "name": "Tennessee Titans",       "logo": "" },
-    { "id": "redskins",     "name": "Washington Redskins",  "logo": "./redskins.gif" }
+    { "id": "redskins",     "name": "Washington Redskins",  "logo": "" }
   ]
 }
