@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>NFL Scoreboard</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -147,10 +148,34 @@
 </table>
 <br/>
 <div id="dice-area"></div>
+
 <button class="roll-button" onclick="rollAndDisplay()">Roll Dice</button>
+
 <div id="handResult" class="hand-display"></div>
+
+<div id="tables-area">
+  <button id="open-table-a" class="ref-btn">1-3 Down</button>
+  <button id="open-table-b" class="ref-btn">4th Down</button>
+  <div id="modal-a" class="modal">
+    <div class="modal-content">
+      <h2>1–3 Down</h2>
+      <div id="table-a-content"></div>
+      <button class="close-modal" data-target="modal-a">Close</button>
+    </div>
+  </div>
+  <div id="modal-b" class="modal">
+    <div class="modal-content">
+      <h2>4th Down</h2>
+      <div id="table-b-content"></div>
+      <button class="close-modal" data-target="modal-b">Close</button>
+    </div>
+  </div>
+
+</div>
 <script src="util.js"></script>
 <script src="dice.js"></script>
+<script src="tables.js"></script>
 <div id="output"></div>
+</br></br>
 </body>
 </html>

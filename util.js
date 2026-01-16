@@ -5,6 +5,27 @@ let DEBUG = false;
 let ballOn = 35;   // internal 0–100
 let teams = [];
 
+// --------------------
+// TABLE BUTTONS
+// --------------------
+document.getElementById("open-table-a").onclick = () =>
+  document.getElementById("modal-a").classList.add("show");
+
+document.getElementById("open-table-b").onclick = () =>
+  document.getElementById("modal-b").classList.add("show");
+
+document.querySelectorAll(".close-modal").forEach(btn => {
+  btn.onclick = () => {
+    const id = btn.dataset.target;
+    document.getElementById(id).classList.remove("show");
+  };
+});
+
+document.querySelectorAll(".modal").forEach(modal => {
+  modal.addEventListener("click", e => {
+    if (e.target === modal) modal.classList.remove("show");
+  });
+});
 // =========================
 // Clock / Down / Score / Ball Position
 // =========================

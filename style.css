@@ -6,6 +6,54 @@ body {
   text-align: center;
   padding: 0px;
   margin: 0 auto;
+  padding-bottom: 12px;
+}
+.ref-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px;
+}
+
+.ref-table th,
+.ref-table td {
+  border-bottom: 1px solid #ccc;
+  padding: 6px 8px;
+  text-align: left;
+}
+
+.ref-table th {
+  background: #f2f2f2;
+  font-weight: bold;
+}
+.ref-btn {
+  padding: 8px 14px;
+  margin: 6px;
+  font-size: 16px;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-content {
+  color: black;
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+  max-width: 90%;
+  max-height: 80%;
+  overflow-y: auto;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
 }
 
 /* === TEAM LOGOS === */
@@ -241,7 +289,7 @@ body {
 }
 
 /* Roll Dice button */
-.roll-button {
+.roll-button,ref-btn {
   padding: 10px 20px;
   border-radius: 10px;   /* keep if you want roll-button rounder */
   margin-top: 10px;
@@ -251,7 +299,8 @@ body {
 /* === BUTTON SHAPE & FEEL (shared) === */
 .pmbutton,
 .actionbutton,
-.roll-button {
+.roll-button,
+.ref-btn{
   border-radius: 6px;
   cursor: pointer;
 }
@@ -288,6 +337,16 @@ body {
   background: gray;
   color: white;
 }
+/* === TABLE BUTTON COLORS === */
+.ref-btn {
+  background: wheat;
+  color: black;
+  border: 2px solid gray;
+}
+.ref-btn:active {
+  background: gray;
+  color: white;
+}
 
 /* Captions / labels near buttons */
 .q-label,
@@ -311,6 +370,7 @@ body {
 .score { font-weight: bold; }
 .clock { font-weight: bold; }
 .pmbutton { font-weight: normal; }
+.ref-btn { font-weight: normal; }
 .actionbutton { font-weight: bold; }
 .roll-button { font-weight: bold; }
 .ballon-label { font-weight: 600; }
@@ -328,7 +388,7 @@ body {
 .scoreboard-field { font-size: 32px; }
 .clock { font-size: 32px; }
 .home-name span,
-.away-name span { font-size: 24px; }
+.away-name span { font-size: 15px; }
 .roll-button { font-size: 20px; }
 .ballon-label { font-size: 28px; }
 .down-label { font-size: 35px; }
@@ -345,7 +405,7 @@ body {
 #homeLabel,
 #awayLabel {
   margin-left: 6px;
-  font-size: 32px;
+  font-size: 28px;
   font-weight: bold;
 }
 .hand-highlight {
@@ -360,6 +420,9 @@ body {
   margin-top: 10px;
 }
 /* === MOBILE === */
+* {
+  touch-action: manipulation;
+}
 @media (orientation: portrait) {
   .scoreboard {
     width: 100%;
