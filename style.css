@@ -158,16 +158,33 @@ body {
 
 /* === DICE === */
 .die {
-  display: inline-block; /* CRITICAL */
-  font-size: 60px;     /* your mobile size */
-  margin-top: -10px;   
-}
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
+  width: 64px;      /* tighter box */
+  height: 64px;
+
+  font-size: 100px; /* forces emoji to fill the box */
+  line-height: 1;
+  overflow: hidden;
+
+  padding: 0;
+  margin: 0;
+
+  box-sizing: border-box;
+}
 
 .die-white { color: inherit; }
 .die-red {
   color: red;
   filter: drop-shadow(0 0 4px #900);
+}
+
+.die-highlight {
+  border-bottom: 4px solid gold;
+  border-radius: 0;
+  padding: 0;
 }
 
 /* === DICE AREA === */
@@ -189,10 +206,15 @@ body {
   align-items: center;
   margin: 0 4px;
   width: 80px;
+  justify-content: flex-start;
+}
+
+.die-wrapper > .die {
+  flex: 0 0 auto;
 }
 /* === GLOBAL HOLD DOT === */
 .hold-dot {
-  font-size: 18px;     /* or 32px in landscape */
+  font-size: 18px;  /* or 32px in landscape */
   line-height: 18px;
   margin-bottom: 0;
   color: gold;
@@ -331,12 +353,7 @@ body {
   padding: 4px 8px;
   border-radius: 6px;
 }
-.die-highlight {
-  border: 4px solid gold;
-  border-radius: 8px;
-  padding: 2px;
-  display: inline-block; /* CRITICAL */
-}
+
 .hand-display {
   font-size: 24px;
   font-weight: bold;

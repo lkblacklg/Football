@@ -1,7 +1,7 @@
 // =========================
 // Global Flags & State
 // =========================
-let DEBUG = true;
+let DEBUG = false;
 let ballOn = 35;   // internal 0–100
 let teams = [];
 

@@ -1,5 +1,10 @@
 // --- Logic ---
-
+function dumpDieStyles(die) {
+  const cs = getComputedStyle(die);
+  debugLog("font-size: " + cs.fontSize);
+  debugLog("line-height: " + cs.lineHeight);
+  debugLog("vertical-align: " + cs.verticalAlign);
+}
 function clearDiceHighlight() {
   document.querySelectorAll(".die").forEach(d => {
     d.classList.remove("die-highlight");
@@ -10,20 +15,52 @@ function clearDiceHighlight() {
 function highlightMatchingDice(dice, result) {
   const diceElems = document.querySelectorAll(".die"); 
   // --- Pair, Two Pair, Three, Four, Yahtzee ---
-  if (["Pair","Two Pair","Three of a Kind","Four of a Kind","Yahtzee","Full House"].includes(result)) {
-    const counts = getCounts(dice);
-    const targetValue = Object.keys(counts).find(v => counts[v] > 1);
+ // --- Matching dice (pairs, two pair, trips, full house, quads, yahtzee) ---
+if (["Pair", "Two Pair", "Three of a Kind", "Full House", "Four of a Kind", "Yahtzee"].includes(result)) {
 
+  const counts = {};
+  dice.forEach(v => counts[v] = (counts[v] || 0) + 1);
+
+  // all values that appear more than once
+  const targets = Object.keys(counts)
+    .filter(v => counts[v] > 1)
+    .map(Number);
+
+  dice.forEach((val, i) => {
+    if (targets.includes(val)) {
+      diceElems[i].classList.add("die-highlight");
+    }
+  });
+
+  return;
+}
+// --- Small Straight ---
+if (result === "Small Straight") {
+  const sorted = [...dice].sort((a, b) => a - b);
+  const unique = [...new Set(sorted)];
+
+  const patterns = [
+    [1,2,3,4],
+    [2,3,4,5],
+    [3,4,5,6]
+  ];
+
+  // find which pattern matches
+  const match = patterns.find(p =>
+    p.every(n => unique.includes(n))
+  );
+
+  if (match) {
     dice.forEach((val, i) => {
-      if (val == targetValue) {
+      if (match.includes(val)) {
         diceElems[i].classList.add("die-highlight");
       }
     });
-    return;
   }
-
-  // --- Straights (highlight all dice in the straight) ---
-  if (result === "Small Straight" || result === "Large Straight") {
+  return;
+}
+  // --- Straight (highlight all dice ---
+  if ( result === "Large Straight") {
     diceElems.forEach(d => d.classList.add("die-highlight"));
     return;
   }
@@ -101,6 +138,10 @@ function updateHandDisplay(dice) {
   if (result !== "") {
     highlightMatchingDice(dice, result);
   }
+    // TEMP: dump styles for the first die
+ // const die = document.querySelector('.die');
+ // if (die) dumpDieStyles(die);
+
 }
 
 // state: 5 dice, each with value + held
