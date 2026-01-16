@@ -11,8 +11,8 @@
   <button class="actionbutton" onclick="newGame()">New Game</button>
 </div>
 <div class="scoreboard-title">
-<select id="homeTeamSelect" onchange="teamSelectChange(this)"></select>
-<select id="awayTeamSelect" onchange="teamSelectChange(this)"></select>
+<select id="homeTeamSelect" class="team-select" onchange="teamSelectChange(this)"></select>
+<select id="awayTeamSelect" class="team-select" onchange="teamSelectChange(this)"></select>
 
 
 <table class="scoreboard">
@@ -20,22 +20,21 @@
 <!-- ROW 1: HOME | AWAY -->
 <tr class="score-row">
 
-  <!-- HOME -->
-  <td style="width:50%; text-align:center; border:none;"
-      onclick="setPossession('home')">
-    <span id="home-possession"></span>
-    <span id="homeLabel">Home</span>
-    <div id="homeScore" class="score">0</div>
-  </td>
+<!-- HOME -->
+<td style="width:50%; text-align:center; border:none;"
+    onclick="setPossession('home')">
+  <span id="home-possession"></span>
+  <span id="homeLabel">Home</span>
+  <div id="homeScore" class="score">0</div>
+</td>
 
-  <!-- AWAY -->
-  <td style="width:50%; text-align:center; border:none;"
-      onclick="setPossession('away')">
-    <span id="away-possession"></span>
-    <span id="awayLabel">Away</span>
-    <div id="awayScore" class="score">0</div>
-  </td>
-
+<!-- AWAY -->
+<td style="width:50%; text-align:center; border:none;"
+    onclick="setPossession('away')">
+  <span id="away-possession"></span>
+  <span id="awayLabel">Away</span>
+  <div id="awayScore" class="score">0</div>
+</td>
 </tr>
 
   <!-- ROW 2: SCORE BUTTONS -->
@@ -149,9 +148,9 @@
 <br/>
       <div id="dice-area"></div>
       <button class="roll-button" onclick="rollAndDisplay()">Roll Dice</button>
-
+<div id="handResult" class="hand-display"></div>
 <script src="util.js"></script>
 <script src="dice.js"></script>
-
+<div id="output"></div>
 </body>
 </html>

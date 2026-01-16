@@ -1,10 +1,9 @@
 // =========================
 // Global Flags & State
 // =========================
-let DEBUG = false;
+let DEBUG = true;
 let ballOn = 35;   // internal 0–100
-
-
+let teams = [];
 
 // =========================
 // Clock / Down / Score / Ball Position
@@ -96,8 +95,7 @@ function rollDice() {
 // Team Loading & Dropdowns
 // =========================
 async function init() {
-  const teams = await loadTeams();
-
+  teams = await loadTeams();
   const homeSelect = document.getElementById("homeTeamSelect");
   const awaySelect = document.getElementById("awayTeamSelect");
 
@@ -113,10 +111,8 @@ async function init() {
   teamSelectChange(awaySelect);
   newGame();
 }
-function newGame() {
 
-document.getElementById("homeLogo").src = "./redskins.gif";
-document.getElementById("homeLogo").style.display = "inline-block";
+function newGame() {
 
   // Reset quarter and down
   document.getElementById("quarterField").value = 1;
@@ -141,7 +137,7 @@ function populateDropdown(select, teams) {
   teams.forEach(team => {
     const option = document.createElement("option");
     option.value = team.id;
-    option.textContent = team.name;
+    option.textContent = team.city;
     option.dataset.logo = team.logo;
     select.appendChild(option);
   });
@@ -150,9 +146,14 @@ function populateDropdown(select, teams) {
 async function loadTeams() {
   const response = await fetch("teams.json");
   const data = await response.json();
+
+  data.teams.forEach(team => {
+    const parts = team.name.split(" ");
+    team.shortName = parts[parts.length - 1];   // Cowboys
+    team.city = parts.slice(0, -1).join(" ");   // Dallas
+  });
   return data.teams;
 }
-
 
 
 // =========================
@@ -171,8 +172,6 @@ function setPossession(team) {
   }
 }
 
-
-
 // =========================
 // Team Select Handler
 // =========================
@@ -181,11 +180,19 @@ function teamSelectChange(sel) {
   const tlabel = document.getElementById(prefix + "Label");
   const tlogo  = document.getElementById(prefix + "Logo");
 
-  const option = sel.options[sel.selectedIndex];
-  tlabel.textContent = option.textContent;
+  debugLog(`Updating label: ${prefix}Label`);
 
+  const selectedId = sel.value;
+  const team = teams.find(t => t.id === selectedId);
+
+  // Update label with short name
+  tlabel.textContent = team.shortName;
+
+  // Get the selected <option>
+  const option = sel.options[sel.selectedIndex];
   const logo = option.dataset.logo;
 
+  // Update logo if the element exists
   if (tlogo) {
     if (logo && logo.trim() !== "") {
       tlogo.src = "logos/" + logo;
