@@ -84,8 +84,8 @@ function newQuarter() {
   // write it back
   document.getElementById("quarterField").value = q;
 
-  // reset down to 1
-  document.getElementById("downField").value = 1;
+  // reset down to 1 dont do this
+  //document.getElementById("downField").value = 1;
 
   // reset clock to 15:00
   document.getElementById("game-clock").textContent = "15:00";
