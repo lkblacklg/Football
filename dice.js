@@ -201,16 +201,7 @@ function renderFiveDice() {
     dot.textContent="●";
     dot.style.visibility = dieObj.held ? "visible" : "hidden";
 
-    // actual die face
-    const die = document.createElement("span");
-    die.textContent = diceFaces[dieObj.value];
-    die.classList.add("die");
-
-    if (index < 2) {
-      die.classList.add("die-red");     // first 2 dice
-    } else {
-      die.classList.add("die-white");   // last 3 dice
-    }
+    const die = buildDie(dieObj.value, index < 2);
 
     wrapper.appendChild(dot);
     wrapper.appendChild(die);
@@ -221,4 +212,28 @@ function renderFiveDice() {
 // --- Trigger ---
 function rollAndDisplay() {
   rollAllDice();
+}
+function buildDie(value, isRed) {
+  const die = document.createElement("div");
+  die.classList.add("die");
+  die.classList.add(isRed ? "red" : "white");
+
+  // pip positions for each face
+  const pipMap = {
+    1: [4],
+    2: [0, 8],
+    3: [0, 4, 8],
+    4: [0, 2, 6, 8],
+    5: [0, 2, 4, 6, 8],
+    6: [0, 2, 3, 5, 6, 8]
+  };
+
+  pipMap[value].forEach(pos => {
+    const pip = document.createElement("span");
+    pip.classList.add("pip");
+    pip.style.gridArea = `${Math.floor(pos / 3) + 1} / ${pos % 3 + 1}`;
+    die.appendChild(pip);
+  });
+
+  return die;
 }

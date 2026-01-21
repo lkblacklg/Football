@@ -222,19 +222,45 @@ body {
 
   box-sizing: border-box;
 }
-
-.die-white { color: inherit; }
-.die-red {
-  color: red;
-  filter: drop-shadow(0 0 4px #900);
+.die {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  padding: 8px;
+  box-sizing: border-box;
+  margin: 6px;
 }
 
-.die-highlight {
-  border-bottom: 4px solid gold;
-  border-radius: 0;
-  padding: 0;
+
+
+.die.white {
+  background: white;
+  border: 2px solid #000;
 }
 
+.die.white .pip {
+  background: black;
+}
+
+.die.red {
+  background: red;
+  border: 2px solid #700;
+}
+
+.die.red .pip {
+  background: white;
+}
+
+.pip {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  justify-self: center;
+  align-self: center;
+}
 /* === DICE AREA === */
 #dice-area {
   display: flex;
