@@ -4,6 +4,8 @@
 let DEBUG = false;
 let ballOn = 35;   // internal 0–100
 let teams = [];
+const whistleSound = new Audio("whistle.mp3");
+whistleSound.volume = 0.5;
 
 // --------------------
 // TABLE BUTTONS
@@ -134,7 +136,8 @@ async function init() {
 }
 
 function newGame() {
-
+whistleSound.currentTime = 0;
+whistleSound.play();
   // Reset quarter and down
   document.getElementById("quarterField").value = 1;
   document.getElementById("downField").value = 1;
