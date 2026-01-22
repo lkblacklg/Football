@@ -63,8 +63,15 @@ function highlightMatchingDice(dice, result) {
     return;
   }
 }
-function rollDice() {
-  return Math.floor(Math.random() * 6) + 1;
+function rollDie() {
+  const r = Math.random(); // 0 <= r < 1
+
+  if (r < 0.10) return 1;        // 10%
+  if (r < 0.28) return 2;        // 18% (0.10–0.28)
+  if (r < 0.46) return 3;        // 18% (0.28–0.46)
+  if (r < 0.64) return 4;        // 18% (0.46–0.64)
+  if (r < 0.82) return 5;        // 18% (0.64–0.82)
+  return 6;                      // 18% (0.82–1.00)
 }
 function getCounts(dice) {
   const counts = {};

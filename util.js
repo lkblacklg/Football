@@ -137,7 +137,7 @@ async function init() {
 
 function newGame() {
 whistleSound.currentTime = 0;
-whistleSound.play();
+//whistleSound.play();
   // Reset quarter and down
   document.getElementById("quarterField").value = 1;
   document.getElementById("downField").value = 1;
